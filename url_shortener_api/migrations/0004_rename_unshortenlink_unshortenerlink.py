@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('url_shortener_api', '0003_alter_unshortenlink_original_link_and_more'),
+        ("url_shortener_api", "0003_alter_unshortenlink_original_link_and_more"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='UnshortenLink',
-            new_name='UnshortenerLink',
+            old_name="UnshortenLink",
+            new_name="UnshortenerLink",
         ),
     ]

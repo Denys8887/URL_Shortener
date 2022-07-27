@@ -1,9 +1,10 @@
-from django.db import models
-from random import choices
-from string import ascii_letters
-from django.conf import settings
 import http.client
 import urllib.parse
+from random import choices
+from string import ascii_letters
+
+from django.conf import settings
+from django.db import models
 
 
 class Link(models.Model):
@@ -13,8 +14,8 @@ class Link(models.Model):
 
     def shortener(self):
         while True:
-            random_string = ''.join(choices(ascii_letters, k=6))
-            new_link = settings.HOST_URL + '/' + random_string
+            random_string = "".join(choices(ascii_letters, k=6))
+            new_link = settings.HOST_URL + "/" + random_string
 
             if not Link.objects.filter(shortened_link=new_link).exists():
                 break
@@ -35,10 +36,10 @@ class UnshortenerLink(models.Model):
     def unshortener_url(self):
         parsed = urllib.parse.urlparse(self)
         h = http.client.HTTPConnection(parsed.netloc)
-        h.request('HEAD', parsed.path)
+        h.request("HEAD", parsed.path)
         response = h.getresponse()
-        if response.status / 100 == 3 and response.getheader('Location'):
-            return response.getheader('Location')
+        if response.status / 100 == 3 and response.getheader("Location"):
+            return response.getheader("Location")
         else:
             return self
 

@@ -1,7 +1,7 @@
+from django.conf import settings
 from django.shortcuts import redirect
 from django.views import View
-from rest_framework.generics import ListAPIView, CreateAPIView
-from django.conf import settings
+from rest_framework.generics import CreateAPIView, ListAPIView
 
 from url_shortener_api.models import Link
 from url_shortener_api.serializers import LinkSerializer, UnshortenerSerializer
@@ -27,6 +27,8 @@ class UnshortenerCreateApiView(CreateAPIView):
 
 class Redirector(View):
     def get(self, request, shortener_link, *args, **kwargs):
-        shortener_link = settings.HOST_URL + '/' + self.kwargs['shortener_link']
-        redirect_link = Link.objects.filter(shortened_link=shortener_link).first().original_link
+        shortener_link = settings.HOST_URL + "/" + self.kwargs["shortener_link"]
+        redirect_link = (
+            Link.objects.filter(shortened_link=shortener_link).first().original_link
+        )
         return redirect(redirect_link)

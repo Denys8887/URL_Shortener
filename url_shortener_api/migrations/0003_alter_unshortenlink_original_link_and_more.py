@@ -6,18 +6,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('url_shortener_api', '0002_alter_unshortenlink_original_link_and_more'),
+        ("url_shortener_api", "0002_alter_unshortenlink_original_link_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='unshortenlink',
-            name='original_link',
+            model_name="unshortenlink",
+            name="original_link",
             field=models.URLField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='unshortenlink',
-            name='shortened_link',
+            model_name="unshortenlink",
+            name="shortened_link",
             field=models.URLField(),
         ),
     ]
